@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getEmployees, deleteEmployee } from '../api';
+import './ViewEmployee.css'; // We'll add custom styles here
 
 function ViewEmployee() {
   const [employees, setEmployees] = useState([]);
@@ -14,27 +15,28 @@ function ViewEmployee() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete?");
+    const confirmDelete = window.confirm("❗ Are you sure you want to delete this employee?");
     if (confirmDelete) {
       await deleteEmployee(id);
-      loadEmployees(); // Refresh list
+      loadEmployees();
     }
   };
 
   return (
-    <div>
-      <h2>📋 Employee List</h2>
+    <div className="view-container">
+      <h2>👥 Employee Directory</h2>
+
       {employees.length === 0 ? (
-        <p>No employees found.</p>
+        <p className="no-emp-msg">No employees found 👻</p>
       ) : (
-        <table border="1" cellPadding="10">
+        <table className="emp-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Designation</th>
-              <th>Actions</th>
+              <th>🆔 ID</th>
+              <th>🧑 Name</th>
+              <th>📧 Email</th>
+              <th>💼 Designation</th>
+              <th>🛠️ Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -45,7 +47,9 @@ function ViewEmployee() {
                 <td>{emp.email}</td>
                 <td>{emp.designation}</td>
                 <td>
-                  <button onClick={() => handleDelete(emp.id)}>🗑️ Delete</button>
+                  <button className="delete-btn" onClick={() => handleDelete(emp.id)}>
+                    🗑️ Delete
+                  </button>
                 </td>
               </tr>
             ))}

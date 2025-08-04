@@ -1,0 +1,74 @@
+/* ViewEmployee.css */
+
+.view-container {
+  min-height: 100vh;
+  background: linear-gradient(to top right, #c7d2fe, #f0abfc, #fbcfe8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.view-container h2 {
+  color: #4f46e5;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.no-emp-msg {
+  font-size: 18px;
+  color: #6b7280;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.emp-table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.emp-table th,
+.emp-table td {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 16px;
+  color: #374151;
+}
+
+.emp-table th {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+.emp-table tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.emp-table tr:hover {
+  background-color: #e0e7ff;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}

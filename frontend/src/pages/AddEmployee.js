@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './AddEmployee.css'; // Import the CSS file
 
 function AddEmployee() {
   const [employee, setEmployee] = useState({
@@ -20,9 +21,7 @@ function AddEmployee() {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:8888/employees', employee, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       });
 
       if (response.status === 200 && response.data.status === 'success') {
@@ -41,37 +40,42 @@ function AddEmployee() {
   };
 
   return (
-    <div>
-      <h2>➕ Add New Employee</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={employee.name}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={employee.email}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <input
-          type="text"
-          name="designation"
-          placeholder="Designation"
-          value={employee.designation}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Adding...' : 'Add Employee'}
-        </button>
-      </form>
+    <div className="add-employee-container">
+      <div className="form-card">
+        <h2 className="form-title">➕ Add New Employee</h2>
+        <form onSubmit={handleSubmit} className="employee-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={employee.name}
+            onChange={handleChange}
+            required
+            className="form-input"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={employee.email}
+            onChange={handleChange}
+            required
+            className="form-input"
+          />
+          <input
+            type="text"
+            name="designation"
+            placeholder="Designation"
+            value={employee.designation}
+            onChange={handleChange}
+            required
+            className="form-input"
+          />
+          <button type="submit" disabled={loading} className={`form-button ${loading ? 'disabled' : ''}`}>
+            {loading ? 'Adding...' : 'Add Employee'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

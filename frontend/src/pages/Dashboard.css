@@ -1,0 +1,62 @@
+/* src/pages/Dashboard.css */
+
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(to top right, #c7d2fe, #f0abfc, #fbcfe8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.card {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  flex: 1 1 280px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 20px;
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 18px;
+  color: #374151;
+}
+
+.latest-card .latest-emp p {
+  margin: 6px 0;
+}
+
+.loading,
+.error {
+  font-size: 18px;
+  color: #6b7280;
+  margin-top: 20px;
+}
