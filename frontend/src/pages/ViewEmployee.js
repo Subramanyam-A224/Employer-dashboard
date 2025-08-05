@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getEmployees, deleteEmployee } from '../api';
-import './ViewEmployee.css'; // We'll add custom styles here
+import './ViewEmployee.css';
 
 function ViewEmployee() {
   const [employees, setEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     loadEmployees();
@@ -22,11 +23,26 @@ function ViewEmployee() {
     }
   };
 
+  const filteredEmployees = employees.filter((emp) =>
+    emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    emp.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    emp.designation.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="view-container">
       <h2>👥 Employee Directory</h2>
 
-      {employees.length === 0 ? (
+      {/* 🔍 Search Input */}
+      <input
+        type="text"
+        placeholder="🔍 Search by name, email, or designation..."
+        className="search-box"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      {filteredEmployees.length === 0 ? (
         <p className="no-emp-msg">No employees found 👻</p>
       ) : (
         <table className="emp-table">
@@ -40,7 +56,7 @@ function ViewEmployee() {
             </tr>
           </thead>
           <tbody>
-            {employees.map(emp => (
+            {filteredEmployees.map(emp => (
               <tr key={emp.id}>
                 <td>{emp.id}</td>
                 <td>{emp.name}</td>
