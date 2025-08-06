@@ -11,9 +11,14 @@ function ViewEmployee() {
   }, []);
 
   const loadEmployees = async () => {
-    const data = await getEmployees();
-    setEmployees(data);
-  };
+  const response = await getEmployees();
+  if (response.status === 'success') {
+    setEmployees(response.data);  // Correctly setting only the employee array
+  } else {
+    setEmployees([]); // fallback
+  }
+ };
+
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("❗ Are you sure you want to delete this employee?");

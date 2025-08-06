@@ -1,28 +1,65 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddEmployee from './pages/AddEmployee';
 import ViewEmployee from './pages/ViewEmployee';
-import './App.css'; // NEW - import custom styling
+import ProtectedRoute from './ProtectedRoute';
+import './App.css';
 
-function App() {
+function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/');
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="nav-logo">👨‍💼 Employer Dashboard</div>
+      <div className="nav-links">
+        <Link to="/dashboard" className="nav-link">🏠 Dashboard</Link>
+        <Link to="/add" className="nav-link">➕ Add Employee</Link>
+        <Link to="/view" className="nav-link">📋 View Employees</Link>
+        <button onClick={handleLogout} className="nav-link logout-btn">🚪 Logout</button>
+      </div>
+    </nav>
+  );
+}
+
+function AppWrapper() {
   return (
     <Router>
       <div className="app-container">
-        <nav className="navbar">
-          <div className="nav-logo">👨‍💼 Employer Dashboard</div>
-          <div className="nav-links">
-            <Link to="/" className="nav-link">🏠 Dashboard</Link>
-            <Link to="/add" className="nav-link">➕ Add Employee</Link>
-            <Link to="/view" className="nav-link">📋 View Employees</Link>
-          </div>
-        </nav>
-
+        <Navbar />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/add" element={<AddEmployee />} />
-            <Route path="/view" element={<ViewEmployee />} />
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <ProtectedRoute>
+                  <AddEmployee />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/view"
+              element={
+                <ProtectedRoute>
+                  <ViewEmployee />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </div>
@@ -30,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppWrapper;

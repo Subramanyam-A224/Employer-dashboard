@@ -29,26 +29,26 @@ function Dashboard() {
 
       {loading ? (
         <p className="loading">Loading stats...</p>
-      ) : stats ? (
+      ) : stats ?.data ? (
         <div className="cards">
           <div className="card">
             <h3>Total Employees</h3>
-            <p>{stats.total_employees}</p>
+            <p>{stats.data.total_employees}</p>
           </div>
 
           <div className="card">
             <h3>Unique Designations</h3>
-            <p>{stats.total_designations}</p>
+            <p>{stats.data.total_designations}</p>
           </div>
 
           <div className="card latest-card">
             <h3>Recently Added</h3>
-            {stats.latest_employee ? (
+            {stats.data.latest_employee ? (
               <div className="latest-emp">
-                <p><strong>Name:</strong> {stats.latest_employee.name}</p>
-                <p><strong>Email:</strong> {stats.latest_employee.email}</p>
-                <p><strong>Role:</strong> {stats.latest_employee.designation}</p>
-                <p><strong>Added:</strong> {new Date(stats.latest_employee.created_at).toLocaleString()}</p>
+                <p><strong>Name:</strong> {stats.data.latest_employee.name}</p>
+                <p><strong>Email:</strong> {stats.data.latest_employee.email}</p>
+                <p><strong>Role:</strong> {stats.data.latest_employee.designation}</p>
+                <p><strong>Added:</strong> {new Date(stats.data.latest_employee.created_at).toLocaleString()}</p>
               </div>
             ) : (
               <p>No employees yet.</p>
